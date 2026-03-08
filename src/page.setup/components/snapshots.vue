@@ -35,6 +35,8 @@
 
         .btn(@click="openAllWindows(state.activeSnapshot)").
           {{translate('snapshot.btn_open_all_win')}}
+        .btn(@click="openInSingleWindow(state.activeSnapshot)").
+          {{translate('snapshot.btn_open_in_single_win')}}
       .content(v-if="state.activeSnapshot")
         .windows
           .window(v-for="(win, i) in state.activeSnapshot.windows" :key="i")
@@ -331,6 +333,18 @@ async function openAllWindows(snapshot: T.SnapshotState | null): Promise<void> {
     await IPC.bg('openSnapshotWindows', normSnapshot)
   } catch (err) {
     Logs.err('Snapshots: Cannot openAllWindows', err)
+  }
+}
+
+async function openInSingleWindow(snapshot: T.SnapshotState | null): Promise<void> {
+  if (!snapshot) return
+
+  const normSnapshot = Snapshots.snapshotStateToNormalizedSnapshot(snapshot)
+
+  try {
+    await IPC.bg('openSnapshotInSingleWindow', normSnapshot)
+  } catch (err) {
+    Logs.err('Snapshots: Cannot openInSingleWindow', err)
   }
 }
 

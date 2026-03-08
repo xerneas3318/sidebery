@@ -408,6 +408,32 @@ export async function openWindows(
 }
 
 /**
+ * Open all tabs of snapshot in one window
+ */
+export async function openInSingleWindow(
+  snapshot: NormalizedSnapshot,
+  incognito: boolean = false
+): Promise<void> {
+  Logs.info('Snapshots.openInSingleWindow')
+
+  // Adapt containers
+  await adaptContainers(snapshot)
+
+  // Adapt nav and panels
+  await adaptTabsPanels(snapshot)
+
+  const mergedPanels: SnapTab[][] = []
+  for (const winTabs of snapshot.tabs) {
+    if (!winTabs?.length) continue
+    mergedPanels.push(...winTabs)
+  }
+  if (!mergedPanels.length) return
+
+  const mergedSnapshot: NormalizedSnapshot = { ...snapshot, tabs: [mergedPanels] }
+  await openWindow(mergedSnapshot, 0, incognito)
+}
+
+/**
  * Open window of snapshot
  */
 async function openWindow(

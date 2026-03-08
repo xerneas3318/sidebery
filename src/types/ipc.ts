@@ -46,6 +46,7 @@ export type BgActions = {
   addSnapshot: typeof Snapshots.addSnapshot
   removeSnapshot: typeof Snapshots.removeSnapshot
   openSnapshotWindows: typeof Snapshots.openWindows
+  openSnapshotInSingleWindow: typeof Snapshots.openInSingleWindow
   saveFavicon: typeof Favicons.saveFavicon
   reloadFavicons: () => any
   createWindowWithTabs: typeof WindowsBg.createWithTabs

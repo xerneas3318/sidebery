@@ -39,6 +39,7 @@ void (async function main() {
     addSnapshot: Snapshots.addSnapshot,
     removeSnapshot: Snapshots.removeSnapshot,
     openSnapshotWindows: Snapshots.openWindows,
+    openSnapshotInSingleWindow: Snapshots.openInSingleWindow,
     createWindowWithTabs: Windows.createWithTabs,
     isWindowTabsLocked: Windows.isWindowTabsLocked,
     saveFavicon: Favicons.saveFavicon,
